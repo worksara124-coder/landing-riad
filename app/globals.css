@@ -1,0 +1,309 @@
+@import "tailwindcss";
+
+@theme {
+  --color-creme: #f7f2e9;
+  --color-sable: #dccbb5;
+  --color-terracotta: #b97556;
+  /* Nuance soutenue de la terracotta pour les boutons (contraste 4,7:1 avec le texte crème). */
+  --color-terracotta-fonce: #9a5c40;
+  --color-brun: #35271f;
+  --color-brun-logo: #655044;
+  --color-olive: #73765a;
+
+  --font-sans: "Poppins", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-script: "Allison", "Segoe Script", "Brush Script MT", cursive;
+
+  --ease-doux: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+:root {
+  --header-h: 58px;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 12px);
+  background: var(--color-creme);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-creme);
+  color: var(--color-brun);
+  font-family: var(--font-sans);
+  /* Échelle compacte (référence : art.nymorr.com) : texte courant 13,5–14,5 px. */
+  font-size: clamp(0.84rem, 0.82rem + 0.12vw, 0.9rem);
+  line-height: 1.65;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-sable);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-terracotta-fonce);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@layer components {
+  /* ---------- Échelle typographique réduite ---------- */
+  .t-h1 {
+    font-size: clamp(1.6rem, 1.3rem + 1.3vw, 2.3rem); /* ≈ 26 → 37 px */
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+  }
+  .t-h2 {
+    font-size: clamp(1.3rem, 1.12rem + 0.8vw, 1.75rem); /* ≈ 21 → 28 px */
+    font-weight: 600;
+    line-height: 1.22;
+    letter-spacing: -0.02em;
+  }
+  .t-h3 {
+    font-size: 1rem; /* 16 px */
+    font-weight: 600;
+    line-height: 1.35;
+  }
+  .t-lead {
+    font-size: clamp(0.86rem, 0.83rem + 0.15vw, 0.95rem);
+    color: var(--color-brun-logo);
+  }
+  .t-kicker {
+    font-size: 0.69rem; /* 11 px */
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-terracotta-fonce);
+  }
+  .t-note {
+    font-size: 0.69rem; /* 11 px */
+    color: var(--color-brun-logo);
+  }
+
+  /* Titres : capitales fines + accent manuscrit qui chevauche. */
+  .display {
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1.04;
+  }
+
+  .script {
+    font-family: var(--font-script);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0.8;
+    color: var(--color-terracotta);
+  }
+
+  .title-duo {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .title-duo .script {
+    margin-top: -0.1em;
+    transform: rotate(-3deg);
+    transform-origin: left center;
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--color-brun-logo);
+  }
+
+  /* Le seul bouton d'action de la page. */
+  .cta {
+    display: inline-flex;
+    min-height: 46px;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    border-radius: 999px;
+    padding: 0 1.5rem;
+    background: var(--color-terracotta-fonce);
+    color: var(--color-creme);
+    font-size: 0.82rem; /* 13 px */
+    font-weight: 600;
+    box-shadow: 0 10px 24px -12px rgb(154 92 64 / 0.7);
+    transition:
+      background-color 0.35s,
+      transform 0.35s var(--ease-doux),
+      box-shadow 0.35s;
+  }
+
+  .cta:hover {
+    background: var(--color-brun);
+    transform: translateY(-1px);
+    box-shadow: 0 14px 28px -14px rgb(53 39 31 / 0.6);
+  }
+
+  .cta .cta-arrow {
+    transition: transform 0.35s var(--ease-doux);
+  }
+
+  .cta:hover .cta-arrow {
+    transform: translateX(3px);
+  }
+
+  .link-soft {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.86rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-brun);
+    border-bottom: 1px solid rgb(53 39 31 / 0.25);
+  }
+
+  .link-soft:hover {
+    border-color: var(--color-brun);
+  }
+
+  /* Cadre en arche, comme les portes du riad. */
+  .arch {
+    border-radius: 999px 999px 10px 10px;
+    overflow: hidden;
+  }
+
+  .ornament {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--color-terracotta);
+  }
+
+  .ornament::before,
+  .ornament::after {
+    content: "";
+    height: 1px;
+    width: clamp(36px, 6vw, 72px);
+    background: currentColor;
+    opacity: 0.5;
+  }
+
+  /* Motif zellige en fond, teinté et fondu aux bords. */
+  .motif {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .motif::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: var(--motif-color, var(--color-terracotta));
+    opacity: var(--motif-opacity, 0.1);
+    -webkit-mask-image: url("/images/motif.png"),
+      var(--motif-fade, linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent));
+    mask-image: url("/images/motif.png"),
+      var(--motif-fade, linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent));
+    -webkit-mask-size: 360px 360px, 100% 100%;
+    mask-size: 360px 360px, 100% 100%;
+    -webkit-mask-repeat: repeat, no-repeat;
+    mask-repeat: repeat, no-repeat;
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+
+  .motif-sides {
+    --motif-fade: radial-gradient(ellipse 46% 70% at 50% 50%, transparent 40%, #000 100%);
+  }
+
+  /* Apparition douce au scroll (classe ajoutée par Reveal) ; visible sans JavaScript. */
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 1.1s var(--ease-doux),
+      transform 1.1s var(--ease-doux);
+    transition-delay: calc(var(--d, 0) * 120ms);
+  }
+
+  .js [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  .field {
+    width: 100%;
+    min-height: 44px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background: #efe7da;
+    padding: 0 1rem;
+    /* 16 px : en dessous, iOS zoome sur le champ au focus. */
+    font-size: 16px;
+    color: var(--color-brun);
+    transition:
+      background-color 0.3s,
+      border-color 0.3s;
+  }
+
+  .field:hover {
+    background: #e9dfcf;
+  }
+
+  .field:focus {
+    background: #fbf8f2;
+    outline: none;
+    border-color: rgb(101 80 68 / 0.5);
+  }
+
+  .field[aria-invalid="true"] {
+    border-color: var(--color-terracotta-fonce);
+    background: rgb(185 117 86 / 0.06);
+  }
+}
+
+/* Lent zoom de la photo principale. */
+.hero-photo {
+  animation: hero-zoom 14s var(--ease-doux) both;
+}
+
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.08);
+  }
+}
+
+/* Défilement horizontal sans barre visible (le geste reste natif). */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
